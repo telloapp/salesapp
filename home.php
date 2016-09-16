@@ -29,7 +29,7 @@ $view_church = $church->churchdata($id);
 <label>Church Name</label>
 <p><?php echo $row['name']; ?></p>
 <br>
-<label>Church Website</label>
+<!--label>Church Website</label>
 <input type="text" name="website" />
 <br>
 <label>Description</label>
@@ -58,7 +58,7 @@ $view_church = $church->churchdata($id);
 <input type="text" name="music_vid" placeholder="youtube video link" />
 <br>
 <label>How we preach</label>
-<input type="text" name="preach_vid" placeholder="youtube video link" />
+<input type="text" name="preach_vid" placeholder="youtube video link" /-->
 <?php } ?>
 <br>
 </body>
