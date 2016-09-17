@@ -49,9 +49,6 @@ if (empty($_POST) === false) {
                     <div class="form-group">
                         <input type="password" name="password" class="form-control" placeholder="Password"/>
                     </div>          
-                    <div class="form-group">
-                        <input type="checkbox" name="remember_me"/> Remember me
-                    </div>
                 </div>
                 <div class="footer">                                                               
                     <button type="submit" name="submit" class="btn bg-blue btn-block">Log In</button>  <br>
