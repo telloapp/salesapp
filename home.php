@@ -2,10 +2,9 @@
 require 'core/init.php';
 
 $general->logged_out_protect();
-$id   = htmlentities($user['id']); // storing the user's username after clearning for any html tags.
+// $id   = htmlentities($user['id']);
 
-
-$view_church = $church->churchdata($id);
+$view_churches = $church->get_churches();
 
 ?>
 <!DOCTYPE html>
@@ -25,11 +24,11 @@ $view_church = $church->churchdata($id);
 
 <h1>Dashboard</h1>
 
-<?php foreach ($view_church as $row) { ?>
+<?php foreach ($view_churches as $row) { ?>
 <label>Church Name</label>
 <p><?php echo $row['name']; ?></p>
 <br>
-<!--label>Church Website</label>
+<label>Church Website</label>
 <input type="text" name="website" />
 <br>
 <label>Description</label>
@@ -58,8 +57,18 @@ $view_church = $church->churchdata($id);
 <input type="text" name="music_vid" placeholder="youtube video link" />
 <br>
 <label>How we preach</label>
-<input type="text" name="preach_vid" placeholder="youtube video link" /-->
-<?php } ?>
+<input type="text" name="preach_vid" placeholder="youtube video link" />
+<br><br>
+<!-- Click link to edit this church -->
+<a href="editchurch.php?id=<?php echo $row['church_id']; ?>">Edit this church</a> 
 <br>
+<!-- Click link to delete this church -->
+<form method="post" action="deletechurch.php?id=<?php echo $row['church_id']; ?>">
+    <button type="submit" name="deletechurch">Delete this church</button>    
+</form>
+
+<?php } ?>
+<hr>
+
 </body>
 </html>

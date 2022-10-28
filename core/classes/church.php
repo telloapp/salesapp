@@ -40,7 +40,7 @@ class Church{
 		}	
 	}
 
-	public function update_church($website, $name, $text, $email, $addr1, $addr2, $addr3, $addr4, $cell1, $cell2, $pastor, $pastor_site, $id){
+	public function update_church($website, $name, $text, $email, $addr1, $addr2, $addr3, $addr4, $cell1, $cell2, $pastor, $pastor_site, $music_vid, $preach_vid){
 
 		$query = $this->db->prepare("UPDATE `church` SET
 								`website`		= ?,
@@ -54,9 +54,11 @@ class Church{
 								`cell1`			= ?,
 								`cell2`			= ?,
 								`pastor`		= ?,
-								`pastor_site`	= ?
+								`pastor_site`	= ?,
+								`music_vid`	    = ?,
+								`preach_vid`	= ?
 								
-								WHERE `id` 		= ? 
+								WHERE `church_id` = ? 
 								");
 
 		$query->bindValue(1, $website);
@@ -71,8 +73,9 @@ class Church{
 		$query->bindValue(10, $cell2);	
 		$query->bindValue(11, $pastor);	
 		$query->bindValue(12, $pastor_site);	
-		$query->bindValue(13, $time);	
-		$query->bindValue(14, $id);
+		$query->bindValue(13, $music_vid);	
+		$query->bindValue(14, $preach_vid);	
+		$query->bindValue(15, $id);
 		
 		try{
 			$query->execute();
@@ -83,14 +86,14 @@ class Church{
 
 	public function churchdata($id) {
 
-		$query = $this->db->prepare("SELECT * FROM `church` WHERE `user_id`= ?");
+		$query = $this->db->prepare("SELECT * FROM `church` WHERE `church_id`= ?");
 		$query->bindValue(1, $id);
 
 		try{
 
 			$query->execute();
 
-			return $query->fetchAll();
+			return $query->fetch(PDO::FETCH_OBJ);
 
 		} catch(PDOException $e){
 
@@ -113,4 +116,17 @@ class Church{
 
 	}	
 
+
+	public function delete_church($id) {
+
+		$query = $this->db->prepare("DELETE FROM `church` WHERE church_id = ?");
+		$query->bindValue(1, $id);
+
+		try{
+			$query->execute();
+		}catch(PDOException $e){
+			die($e->getMessage());
+		}
+
+	}
 }
